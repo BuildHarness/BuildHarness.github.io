@@ -354,7 +354,13 @@
       buttons[i].setAttribute('aria-pressed', on ? 'true' : 'false');
     }
     applyText();
-    if (persist) store(lang);
+    if (persist) {
+      store(lang);
+      try {
+        var nextUrl = window.location.pathname + '?lang=' + lang + window.location.hash;
+        window.history.replaceState(null, '', nextUrl);
+      } catch (e) { /* history may be unavailable */ }
+    }
   }
 
   function initReveal() {
@@ -430,9 +436,13 @@
   }
 
   var stored = readStored();
-  var initial = stored === 'en' || stored === 'zh'
-    ? stored
-    : ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+  var queryLang = null;
+  try { queryLang = new URLSearchParams(window.location.search).get('lang'); } catch (e) { /* older browsers */ }
+  var initial = queryLang === 'en' || queryLang === 'zh'
+    ? queryLang
+    : (stored === 'en' || stored === 'zh'
+      ? stored
+      : ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en'));
 
   docEl.setAttribute('data-lang', initial);
   var langButtons = document.querySelectorAll('[data-set-lang]');
