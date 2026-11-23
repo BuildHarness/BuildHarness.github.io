@@ -438,11 +438,11 @@
   var stored = readStored();
   var queryLang = null;
   try { queryLang = new URLSearchParams(window.location.search).get('lang'); } catch (e) { /* older browsers */ }
+  // English is the default; Chinese is one click away and can be forced with
+  // ?lang=zh or a stored preference.
   var initial = queryLang === 'en' || queryLang === 'zh'
     ? queryLang
-    : (stored === 'en' || stored === 'zh'
-      ? stored
-      : ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en'));
+    : (stored === 'en' || stored === 'zh' ? stored : 'en');
 
   docEl.setAttribute('data-lang', initial);
   var langButtons = document.querySelectorAll('[data-set-lang]');

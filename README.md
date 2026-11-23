@@ -15,8 +15,9 @@ The source repositories stay private; only this site and the client release arti
 - `assets/fonts/` — Instrument Serif, IBM Plex Sans/Mono (OFL), self-hosted
 
 Every string exists in both languages; add the key to both packs in `site.js`.
-The chosen language is stored in `localStorage` under `hb-site-lang`; shareable links can
-force it with `?lang=zh` or `?lang=en`, and toggling updates the query string.
+English is the default; the chosen language is stored in `localStorage` under
+`hb-site-lang`. Shareable links can force a language with `?lang=zh` or
+`?lang=en`, and toggling updates the query string.
 
 ## Preview
 
