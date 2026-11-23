@@ -11,13 +11,24 @@ The source repositories stay private; only this site and the client release arti
 - `index.html` — structure and copy keys
 - `site.js` — the zh / en dictionary and interactions
 - `site.css` — styling, tokens at the top
-- `assets/shots/` — product screenshots (2880×1800)
+- `assets/shots/zh/`, `assets/shots/en/` — product screenshots per UI language (2880×1800)
 - `assets/fonts/` — Instrument Serif, IBM Plex Sans/Mono (OFL), self-hosted
 
 Every string exists in both languages; add the key to both packs in `site.js`.
 English is the default; the chosen language is stored in `localStorage` under
 `hb-site-lang`. Shareable links can force a language with `?lang=zh` or
-`?lang=en`, and toggling updates the query string.
+`?lang=en`, and toggling updates the query string. Screenshots follow the
+selected language, matched to the real UI.
+
+Dark is the default theme; the toggle stores `hb-site-theme` and supports
+`?theme=light` / `?theme=dark`. Both preferences share the query string with
+`lang`.
+
+## Editions
+
+The download section presents three editions: **User** is free to download,
+**Developer** and **Enterprise** are paid and point at GitHub issues in
+`HarnessBuilder_Downloads` for an inquiry. Keep that split when editing copy.
 
 ## Preview
 
