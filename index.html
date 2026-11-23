@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HarnessBuilder — 私有化部署的 Agent Harness</title>
+<meta name="description" content="HarnessBuilder 是私有化部署的场景化 Agent Harness：五个 CLI 内核统一为一个接口，身份、策略、密钥与模型路由留在客户自己的服务器。">
+<link rel="canonical" href="https://buildharness.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HarnessBuilder">
+<meta property="og:title" content="HarnessBuilder — 私有化部署的 Agent Harness">
+<meta property="og:description" content="Agent 在用户机器上跑，控制权留在你的机房。五个内核统一为一个可替换接口；身份、策略、密钥与模型路由留在客户自己的服务器。">
+<meta property="og:url" content="https://buildharness.github.io/">
+<meta property="og:image" content="https://buildharness.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070a09">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body id="top">
+<a class="skip" href="#main" data-i18n="a11y.skip">跳到正文</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="glow glow-a" aria-hidden="true"></div>
+<div class="glow glow-b" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="HarnessBuilder">
+    <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="29" height="29" rx="7" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M10 22V10m12 12V10M10 16h12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/>
+    </svg>
+    <span class="brand-name">HarnessBuilder</span>
+    <span class="brand-ver" data-i18n="brand.ver">v0.3.1</span>
+  </a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#why" data-i18n="nav.why">为什么</a>
+    <a href="#architecture" data-i18n="nav.arch">架构</a>
+    <a href="#interface" data-i18n="nav.ui">界面</a>
+    <a href="#security" data-i18n="nav.security">安全</a>
+    <a href="#download" data-i18n="nav.download">下载</a>
+  </nav>
+  <div class="topbar-actions">
+    <div class="lang" role="group" data-i18n-attr="aria-label:a11y.lang">
+      <button type="button" data-set-lang="zh" class="on" aria-pressed="true">中</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="ghlink" href="https://github.com/BuildHarness" data-i18n-attr="aria-label:nav.github">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+    </a>
+    <a class="btn btn-sm" href="#download" data-i18n="nav.cta">下载客户端</a>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ── hero ─────────────────────────────────────────────── -->
+  <section class="hero wrap">
+    <div class="hero-copy reveal">
+      <p class="kicker"><span class="dot"></span><span data-i18n="hero.kicker">私有化部署的 Agent Harness</span><span class="kicker-meta" data-i18n="hero.kickerMeta">协议 1.2.0</span></p>
+      <h1 data-i18n-html="hero.title">Agent 在用户机器上跑，<br><em>控制权</em>留在你的机房。</h1>
+      <p class="lede" data-i18n="hero.lede">身份、策略、密钥与模型路由留在客户自己的服务器。opencode、codex、gemini、goose、Claude Code 五个内核统一为一个可替换接口；会话、工作区与账本留在本机。</p>
+      <div class="hero-acts">
+        <a class="btn" href="#download"><span data-i18n="hero.ctaDownload">下载客户端</span><span class="arr" aria-hidden="true">↓</span></a>
+        <a class="btn ghost" href="#architecture"><span data-i18n="hero.ctaSecurity">看边界怎么切</span><span class="arr" aria-hidden="true">→</span></a>
+      </div>
+      <dl class="stats">
+        <div><dt>05</dt><dd data-i18n="hero.stat1">可替换内核</dd></div>
+        <div><dt>15<small>m</small></dt><dd data-i18n="hero.stat2">设备令牌有效期</dd></div>
+        <div><dt>0</dt><dd data-i18n="hero.stat3">客户端持有的 provider key</dd></div>
+        <div><dt>AES<small>-256</small></dt><dd data-i18n="hero.stat4">控制面密钥加密</dd></div>
+      </dl>
+    </div>
+
+    <div class="rig reveal" style="--d:.15s" aria-hidden="true">
+      <div class="rig-bar">
+        <span class="rig-dots"><i></i><i></i><i></i></span>
+        <span class="rig-title">harnessbuilder-client</span>
+        <span class="rig-chip"><i></i><span data-i18n="hero.term.status">账本已校验</span></span>
+      </div>
+      <div class="rig-body">
+        <div class="term">
+          <p><span class="p">$</span> <span data-i18n="hero.term.l1">harnessbuilder-client init --server 10.0.0.10</span></p>
+          <p class="out"><span class="ok">✓</span> <span data-i18n="hero.term.l2">设备已接入 · scoped token 15 分钟</span></p>
+          <p><span class="p">$</span> <span data-i18n="hero.term.l3">harnessbuilder-client start</span></p>
+          <p class="out"><span class="k" data-i18n="hero.term.l4a">runtime</span><span data-i18n="hero.term.l4b">127.0.0.1:8788 · 仅本机回环</span></p>
+          <p class="out"><span class="k" data-i18n="hero.term.l5a">gateway</span><span data-i18n="hero.term.l5b">策略 force_all → demo-model</span></p>
+          <p class="out"><span class="k" data-i18n="hero.term.l6a">kernel</span><span data-i18n="hero.term.l6b">opencode · workspace ~/work</span></p>
+          <p class="out"><span class="k" data-i18n="hero.term.l7a">ledger</span><span data-i18n="hero.term.l7b">sha256 链 · 3 个事件</span></p>
+        </div>
+        <div class="keycard">
+          <span class="keycard-label" data-i18n="hero.term.keyLabel">上游 PROVIDER KEY</span>
+          <span class="keycard-value">sk-<span class="redact"></span></span>
+          <span class="keycard-note" data-i18n="hero.term.keyNote">从不进入客户端、内核或日志</span>
+        </div>
+      </div>
+      <div class="rig-boundary"><span></span><b data-i18n="hero.term.boundary">信任边界</b><span></span></div>
+      <div class="rig-foot">
+        <span data-i18n="hero.term.server">服务端：身份 · 策略签名 · 路由 · 计量</span>
+        <span class="rig-foot-live"><i></i> live</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>OPENCODE</span><span>·</span><span>CODEX</span><span>·</span><span>GEMINI CLI</span><span>·</span><span>GOOSE</span><span>·</span><span>CLAUDE CODE</span><span>·</span>
+      <span>OPENCODE</span><span>·</span><span>CODEX</span><span>·</span><span>GEMINI CLI</span><span>·</span><span>GOOSE</span><span>·</span><span>CLAUDE CODE</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- ── why ──────────────────────────────────────────────── -->
+  <section class="section wrap" id="why">
+    <header class="sec-head reveal">
+      <p class="kicker"><span class="idx">01</span><span data-i18n="why.kicker">为什么是 HarnessBuilder</span></p>
+      <h2 data-i18n-html="why.title">不是一个聊天框，<br>是一台<em>装在客户内网</em>的 harness。</h2>
+      <p class="sec-lede" data-i18n="why.lede">把五个 CLI 内核、策略、路由、计费与审计收束成一套可私有化交付的运行时。每一层边界都写死在代码里，而不是写在部署文档里。</p>
+    </header>
+
+    <ol class="ledger">
+      <li class="reveal">
+        <span class="num">01</span>
+        <div><h3 data-i18n="why.1.title">密钥只在控制面</h3><p data-i18n="why.1.body">上游 provider key 以 AES-256-GCM 加密保存在客户自己的控制面，只在转发请求时于进程内存解密。客户端、子进程、日志、错误信息与 UI 都拿不到明文。</p></div>
+        <span class="tag" data-i18n="why.1.tag">KEY BOUNDARY</span>
+      </li>
+      <li class="reveal">
+        <span class="num">02</span>
+        <div><h3 data-i18n="why.2.title">执行发生在用户机器</h3><p data-i18n="why.2.body">内核进程、工作区、会话库与会话账本都在本机。控制面只接收策略、路由与计量所需的元数据，不做遥测，也不上传整库。</p></div>
+        <span class="tag" data-i18n="why.2.tag">LOCAL FIRST</span>
+      </li>
+      <li class="reveal">
+        <span class="num">03</span>
+        <div><h3 data-i18n="why.3.title">五个内核，一个接口</h3><p data-i18n="why.3.body">opencode、codex、gemini、goose、Claude Code 统一归一化为 KernelEvent。内核能力不足时诚实降级并声明，不把原生 JSON 透传给运行时或界面。</p></div>
+        <span class="tag" data-i18n="why.3.tag">KERNEL SDK</span>
+      </li>
+      <li class="reveal">
+        <span class="num">04</span>
+        <div><h3 data-i18n="why.4.title">路由、配额、计费、审计</h3><p data-i18n="why.4.body">网关把 OpenAI、Anthropic Messages 与 Gemini 协议翻译到同一路由；harness 版本可用 kernelLock 固定内核。每次调用进入追加式哈希账本。</p></div>
+        <span class="tag" data-i18n="why.4.tag">GATEWAY</span>
+      </li>
+      <li class="reveal">
+        <span class="num">05</span>
+        <div><h3 data-i18n="why.5.title">工作流即版本化代码</h3><p data-i18n="why.5.body">图必须是有向无环图，模板与 JSONLogic 条件是严格子集；map 分发、approval 暂停、output 终点。账本只写 prompt 哈希与状态，不写原文。</p></div>
+        <span class="tag" data-i18n="why.5.tag">WORKFLOW V1</span>
+      </li>
+      <li class="reveal">
+        <span class="num">06</span>
+        <div><h3 data-i18n="why.6.title">两种模式，同一条边界</h3><p data-i18n="why.6.body">managed 模式下管理员用 Ed25519 私钥下发签名策略；standalone 模式把策略与密钥留在本机，provider key 只写 OS 凭据库，没有凭据库就报错。</p></div>
+        <span class="tag" data-i18n="why.6.tag">MANAGED / STANDALONE</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ── architecture ─────────────────────────────────────── -->
+  <section class="section wrap arch-sec" id="architecture">
+    <header class="sec-head reveal">
+      <p class="kicker"><span class="idx">02</span><span data-i18n="arch.kicker">边界</span></p>
+      <h2 data-i18n-html="arch.title">一条边界，<em>两种机器</em>。</h2>
+      <p class="sec-lede" data-i18n="arch.lede">模型请求从本机回环代理出发，经控制面网关转发到上游；真实 key 只存在于网关进程。内核拿到的永远只是占位 token。</p>
+    </header>
+
+    <div class="diagram reveal">
+      <article class="node server">
+        <header><span class="pin"></span><h3 data-i18n="arch.serverTitle">你的服务器</h3><span class="mono" data-i18n="arch.serverTag">CONTROL PLANE</span></header>
+        <ul>
+          <li data-i18n="arch.s1">身份、角色与设备凭据</li>
+          <li data-i18n="arch.s2">Ed25519 签名策略，修订只增不覆盖</li>
+          <li data-i18n="arch.s3">Provider 密钥 AES-256-GCM 加密</li>
+          <li data-i18n="arch.s4">模型路由、配额与计费</li>
+          <li data-i18n="arch.s5">计量、审计与备份密文</li>
+        </ul>
+      </article>
+
+      <div class="boundary" aria-hidden="true">
+        <span class="boundary-line"></span>
+        <span class="boundary-chip"><b data-i18n="arch.flowTop">scoped token · 15 min</b><i data-i18n="arch.flowBottom">仅经 loopback proxy</i></span>
+        <span class="boundary-label" data-i18n="arch.boundary">TRUST BOUNDARY</span>
+      </div>
+
+      <article class="node machine">
+        <header><span class="pin"></span><h3 data-i18n="arch.machineTitle">用户机器</h3><span class="mono" data-i18n="arch.machineTag">LOCAL RUNTIME</span></header>
+        <ul>
+          <li data-i18n="arch.m1">五个 Agent 内核，独立工作区</li>
+          <li data-i18n="arch.m2">本机 SQLite 会话库与哈希链账本</li>
+          <li data-i18n="arch.m3">loopback egress proxy 持有短期令牌</li>
+          <li data-i18n="arch.m4">技能快照、记忆审批、加密备份</li>
+          <li data-i18n="arch.m5">网络策略 fail-closed，deny 优先</li>
+        </ul>
+      </article>
+    </div>
+    <p class="diagram-note reveal" data-i18n="arch.note">客户端只有两类凭据：0600 的 device credential，与可独立吊销的网关 API Key（hbk_…）。两者都只代表一台设备。</p>
+  </section>
+
+  <!-- ── interface ────────────────────────────────────────── -->
+  <section class="section wrap" id="interface">
+    <header class="sec-head reveal">
+      <p class="kicker"><span class="idx">03</span><span data-i18n="ui.kicker">界面</span></p>
+      <h2 data-i18n-html="ui.title">界面就在本机，<br>中英<em>一键切换</em>。</h2>
+      <p class="sec-lede" data-i18n="ui.lede">本机 runtime 内置聊天与控制界面，管理控制台运行在你的服务器。两套 UI 都支持中文 / English，选择保存在浏览器里，刷新后保持。</p>
+    </header>
+
+    <div class="shots reveal">
+      <div class="shot-frame">
+        <div class="shot-chrome">
+          <span class="shot-dots"><i></i><i></i><i></i></span>
+          <span class="shot-url" id="shotUrl">http://127.0.0.1:8788</span>
+          <span class="shot-lang">EN / 中</span>
+        </div>
+        <div class="shot-stage">
+          <img id="shotImg" src="assets/shots/local-chat.png" width="2880" height="1800" alt="" data-i18n-attr="alt:ui.alt1">
+        </div>
+      </div>
+      <div class="shot-side">
+        <div class="shot-tabs" role="tablist" aria-orientation="vertical">
+          <button role="tab" aria-selected="true" data-shot="0" data-url="http://127.0.0.1:8788"><span class="tnum">01</span><span data-i18n="ui.tab1">本机对话</span></button>
+          <button role="tab" aria-selected="false" data-shot="1" data-url="http://127.0.0.1:8788"><span class="tnum">02</span><span data-i18n="ui.tab2">技能快照</span></button>
+          <button role="tab" aria-selected="false" data-shot="2" data-url="https://console.internal/overview"><span class="tnum">03</span><span data-i18n="ui.tab3">控制台概览</span></button>
+          <button role="tab" aria-selected="false" data-shot="3" data-url="https://console.internal/harness"><span class="tnum">04</span><span data-i18n="ui.tab4">Harness 版本</span></button>
+          <button role="tab" aria-selected="false" data-shot="4" data-url="https://console.internal/marketplace"><span class="tnum">05</span><span data-i18n="ui.tab5">技能市场</span></button>
+        </div>
+        <div class="shot-cap">
+          <h3 id="shotCapTitle" data-i18n="ui.cap1.title">会话、内核与账本都在本机</h3>
+          <p id="shotCapBody" data-i18n="ui.cap1.body">切换内核、查看文件、连接信息、记忆、技能、备份与账本校验，全部来自 127.0.0.1:8788。</p>
+        </div>
+      </div>
+    </div>
+    <p class="small-note reveal" data-i18n="ui.note">技能在新建会话时取快照；语言选择写入 localStorage，动态状态消息按规则匹配翻译。</p>
+  </section>
+
+  <!-- ── workflow band ────────────────────────────────────── -->
+  <section class="section wf-sec" id="workflow">
+    <div class="wrap wf-grid">
+      <div class="reveal">
+        <p class="kicker"><span class="idx">04</span><span data-i18n="wf.kicker">工作流</span></p>
+        <h2 data-i18n-html="wf.title">需要人拍板的节点，<br>就<em>停在那里</em>。</h2>
+        <p class="sec-lede" data-i18n="wf.lede">approval 节点让运行暂停在 awaiting_approval，等真正的负责人批准后再续跑。批准与拒绝都进入哈希账本，但账本不存 prompt 与输入原文。</p>
+        <ul class="wf-points">
+          <li data-i18n="wf.p1">map：逐行分发，单条失败不静默</li>
+          <li data-i18n="wf.p2">approval：暂停、批准、拒绝、续跑</li>
+          <li data-i18n="wf.p3">output：恰好一个终点，JSON Schema 校验</li>
+        </ul>
+      </div>
+      <div class="reveal" style="--d:.1s">
+        <div class="code-card">
+          <div class="code-bar"><span data-i18n="wf.bar">终端 · 工作流审批</span><span class="code-live"><i></i>json</span></div>
+<pre><code><span class="p">$</span> harnessbuilder-client workflow run invoice-review.json --json
+<span class="dim" data-i18n="wf.l1"># 退出码 2：等待审批</span>
+{ "status": "awaiting_approval",
+  "nodeId": "gate",
+  "request": <span class="str" data-i18n="wf.l2">"Approve 2 rows?"</span> }
+
+<span class="p">$</span> harnessbuilder-client workflow approve run-7f3a --by alice
+<span class="ok">✓</span> <span data-i18n="wf.l3">已批准，继续执行 · 6/6 节点成功</span>
+<span class="k" data-i18n="wf.l4a">ledger</span> <span data-i18n="wf.l4b">workflow_approval_requested → workflow_approval_decided</span></code></pre>
+        </div>
+        <p class="small-note" data-i18n="wf.note">--json 时 stdout 只保留结构化结果，人类可读消息走 stderr；脚本可以直接解析。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── security ─────────────────────────────────────────── -->
+  <section class="section wrap" id="security">
+    <header class="sec-head reveal">
+      <p class="kicker"><span class="idx">05</span><span data-i18n="sec.kicker">安全</span></p>
+      <h2 data-i18n-html="sec.title">六条<em>不可协商</em>的约束。</h2>
+      <p class="sec-lede" data-i18n="sec.lede">这些不是可选项，也不是配置文档里的建议：实现、测试与 UI 都按同一套语义收敛。</p>
+    </header>
+    <div class="sec-grid">
+      <article class="reveal"><span class="num">01</span><h3 data-i18n="sec.1.title">密钥边界</h3><p data-i18n="sec.1.body">客户端只有 0600 的 device credential 与可独立吊销的网关 Key；内核只拿到 loopback 占位 token。</p></article>
+      <article class="reveal"><span class="num">02</span><h3 data-i18n="sec.2.title">15 分钟令牌</h3><p data-i18n="sec.2.body">设备凭据换取 scoped token，只在 loopback 代理进程内存里存在，不落盘、不进环境变量。</p></article>
+      <article class="reveal"><span class="num">03</span><h3 data-i18n="sec.3.title">Fail-closed 网络</h3><p data-i18n="sec.3.body">deny 优先于任何模式；厂商与遥测域名强制拦截。已存策略无法解析时按 deny-all 执行。</p></article>
+      <article class="reveal"><span class="num">04</span><h3 data-i18n="sec.4.title">加密备份</h3><p data-i18n="sec.4.body">客户端分块加密后再上传；控制面只保存密文、密文哈希、大小与时间，默认无法解密。</p></article>
+      <article class="reveal"><span class="num">05</span><h3 data-i18n="sec.5.title">哈希链账本</h3><p data-i18n="sec.5.body">会话与工作流事件追加写链，审批请求与决定都入账；历史不可修改或删除。</p></article>
+      <article class="reveal"><span class="num">06</span><h3 data-i18n="sec.6.title">签名策略</h3><p data-i18n="sec.6.body">Ed25519 私钥签名，修订只增不覆盖；设备固定公钥，旧修订以 policy_rollback 拒绝。</p></article>
+    </div>
+  </section>
+
+  <!-- ── download ─────────────────────────────────────────── -->
+  <section class="section wrap dl-sec" id="download">
+    <header class="sec-head reveal">
+      <p class="kicker"><span class="idx">06</span><span data-i18n="dl.kicker">下载</span></p>
+      <h2 data-i18n-html="dl.title">把它装进<em>客户的内网</em>。</h2>
+      <p class="sec-lede" data-i18n="dl.lede">客户端是一个自包含的 Node.js bundle（需要 Node 22+）。安装时输入控制面地址，以及管理员签发的一次性接入令牌。</p>
+    </header>
+
+    <div class="os-grid">
+      <article class="os-card reveal">
+        <div class="os-head"><span class="os-name">macOS · Linux</span><span class="os-ver" data-i18n="dl.osUnix">Node 22+</span></div>
+        <p class="os-desc" data-i18n="dl.macDesc">安装到 ~/.local/bin，接入设备并启动本机 runtime。</p>
+        <div class="cmd">
+          <code id="cmdUnix">curl -fsSL https://github.com/BuildHarness/HarnessBuilder_Downloads/releases/latest/download/install.sh | bash</code>
+          <button class="copy" type="button" data-copy="cmdUnix" data-i18n-attr="aria-label:a11y.copy"><span data-i18n="dl.copy">复制</span></button>
+        </div>
+      </article>
+
+      <article class="os-card reveal" style="--d:.08s">
+        <div class="os-head"><span class="os-name">Windows 10 / 11</span><span class="os-ver" data-i18n="dl.osWin">Node 22+ · PowerShell</span></div>
+        <p class="os-desc" data-i18n="dl.winDesc">安装到 %LOCALAPPDATA%\harnessbuilder，写入用户 PATH 并创建命令入口。</p>
+        <div class="cmd">
+          <code id="cmdWin">irm https://github.com/BuildHarness/HarnessBuilder_Downloads/releases/latest/download/install.ps1 | iex</code>
+          <button class="copy" type="button" data-copy="cmdWin" data-i18n-attr="aria-label:a11y.copy"><span data-i18n="dl.copy">复制</span></button>
+        </div>
+      </article>
+
+      <article class="os-card reveal" style="--d:.16s">
+        <div class="os-head"><span class="os-name" data-i18n="dl.manualTitle">手动下载</span><span class="os-ver">v0.3.1</span></div>
+        <p class="os-desc" data-i18n="dl.manualDesc">直接取 tarball 与校验和，适合离线分发与内网镜像。</p>
+        <ul class="dl-links">
+          <li><a href="https://github.com/BuildHarness/HarnessBuilder_Downloads/releases/latest/download/harnessbuilder-client.tar.gz"><span data-i18n="dl.tarball">harnessbuilder-client.tar.gz</span><span class="ext" aria-hidden="true">↧</span></a></li>
+          <li><a href="https://github.com/BuildHarness/HarnessBuilder_Downloads/releases/latest/download/SHA256SUMS"><span>SHA256SUMS</span><span class="ext" aria-hidden="true">↧</span></a></li>
+          <li><a href="https://github.com/BuildHarness/HarnessBuilder_Downloads/releases"><span data-i18n="dl.notes">全部版本与发行说明</span><span class="ext" aria-hidden="true">→</span></a></li>
+        </ul>
+      </article>
+    </div>
+
+    <ol class="steps">
+      <li class="reveal"><span class="num">01</span><div><h3 data-i18n="dl.step1.title">运行安装器</h3><p data-i18n="dl.step1.body">自动下载、校验 SHA256 并解包；失败即停止，不留下半装状态。</p></div></li>
+      <li class="reveal"><span class="num">02</span><div><h3 data-i18n="dl.step2.title">接入设备</h3><p data-i18n="dl.step2.body">输入控制面 IP / URL 与一次性 enrollment token；裸 IP 按 http://&lt;ip&gt;:8787 解释。</p></div></li>
+      <li class="reveal"><span class="num">03</span><div><h3 data-i18n="dl.step3.title">打开界面</h3><p data-i18n="dl.step3.body">运行 harnessbuilder-client start，打开 http://127.0.0.1:8788。</p></div></li>
+    </ol>
+
+    <p class="dl-note reveal" data-i18n="dl.note">Agent 内核（opencode / codex / gemini / goose / claude）按需另装，客户端不捆绑上游 CLI；桌面外壳需按平台签名，签名制品与离线安装包由客户证书环境生成。</p>
+  </section>
+
+  <!-- ── faq ──────────────────────────────────────────────── -->
+  <section class="section wrap faq-sec" id="faq">
+    <header class="sec-head reveal">
+      <p class="kicker"><span class="idx">07</span><span data-i18n="faq.kicker">常见问题</span></p>
+      <h2 data-i18n-html="faq.title">交付前会问的<em>几件事</em>。</h2>
+    </header>
+    <div class="faq reveal">
+      <details><summary data-i18n="faq.q1">客户端会把代码或对话上传吗？</summary><p data-i18n="faq.a1">不会。会话与工作区留在本机 SQLite 与文件系统，没有遥测。备份是显式可选项：管理员与用户都开启后，客户端在本机加密再上传，服务器只拿到密文。</p></details>
+      <details><summary data-i18n="faq.q2">必须能访问公网吗？</summary><p data-i18n="faq.a2">managed 模式下客户端只连客户自己的控制面网关，由网关访问上游模型。standalone 模式直接连 OpenAI 兼容端点，provider key 只写 OS 凭据库。网络策略 deny 优先，厂商与遥测域名被强制拦截。</p></details>
+      <details><summary data-i18n="faq.q3">支持哪些操作系统？</summary><p data-i18n="faq.a3">macOS、Linux 与 Windows 10/11，要求 Node.js 22+。界面提供中英切换。Windows 上 0600 不等于 ACL，建议把数据目录放在每用户 profile 并启用磁盘加密。</p></details>
+      <details><summary data-i18n="faq.q4">桌面外壳和离线安装包呢？</summary><p data-i18n="faq.a4">Tauri 外壳按平台单独签名分发；签名与公证依赖客户的证书环境。源码保持私有，公开的只有本站与发布制品。</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <a class="brand" href="#top">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="1.5" y="1.5" width="29" height="29" rx="7" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10 22V10m12 12V10M10 16h12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></svg>
+        <span class="brand-name">HarnessBuilder</span>
+      </a>
+      <p class="foot-tag" data-i18n="foot.tag">私有化部署 · 源码不公开 · 制品公开下载</p>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#download" data-i18n="foot.download">下载</a>
+      <a href="https://github.com/BuildHarness/HarnessBuilder_Downloads" data-i18n="foot.downloads">制品仓库</a>
+      <a href="https://github.com/BuildHarness" data-i18n="foot.github">GitHub 组织</a>
+    </nav>
+    <p class="foot-meta"><span>© <span id="year">2026</span> HarnessBuilder</span><span data-i18n="foot.ver">协议 1.2.0 · 客户端 0.3.1</span></p>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
