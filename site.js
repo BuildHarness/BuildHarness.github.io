@@ -9,14 +9,16 @@
       'a11y.skip': '跳到正文',
       'a11y.lang': '界面语言',
       'a11y.copy': '复制命令',
+      'a11y.themeToLight': '切换到浅色风格',
+      'a11y.themeToDark': '切换到深色风格',
       'brand.ver': 'v0.3.1',
       'nav.why': '为什么', 'nav.arch': '架构', 'nav.ui': '界面', 'nav.security': '安全', 'nav.download': '下载',
-      'nav.cta': '下载客户端', 'nav.github': 'BuildHarness GitHub 组织',
+      'nav.cta': '免费下载', 'nav.github': 'BuildHarness GitHub 组织',
       'hero.kicker': '私有化部署的 Agent Harness', 'hero.kickerMeta': '协议 1.2.0',
       'hero.title': 'Agent 在用户机器上，<br><em>控制权</em>留在你的机房。',
       'hero.lede': '身份、策略、密钥与模型路由留在客户自己的服务器。opencode、codex、gemini、goose、Claude Code 五个内核统一为一个可替换接口；会话、工作区与账本留在本机。',
-      'hero.ctaDownload': '下载客户端', 'hero.ctaSecurity': '看边界怎么切',
-      'hero.stat1': '可替换内核', 'hero.stat2': '设备令牌有效期', 'hero.stat3': '客户端持有的 provider key', 'hero.stat4': '控制面密钥加密',
+      'hero.ctaDownload': '免费下载 User 版', 'hero.ctaSecurity': '看边界怎么切',
+      'hero.stat1': '可替换内核', 'hero.stat2': '设备令牌有效期', 'hero.stat3': '客户端持有的 provider key', 'hero.stat4': '条信任边界：服务器 ⇄ 本机',
       'hero.term.status': '账本已校验',
       'hero.term.l1': 'harnessbuilder-client init --server 10.0.0.10',
       'hero.term.l2': '设备已接入 · scoped token 15 分钟',
@@ -100,9 +102,31 @@
       'sec.4.title': '加密备份', 'sec.4.body': '客户端分块加密后再上传；控制面只保存密文、密文哈希、大小与时间，默认无法解密。',
       'sec.5.title': '哈希链账本', 'sec.5.body': '会话与工作流事件追加写链，审批请求与决定都入账；历史不可修改或删除。',
       'sec.6.title': '签名策略', 'sec.6.body': 'Ed25519 私钥签名，修订只增不覆盖；设备固定公钥，旧修订以 policy_rollback 拒绝。',
-      'dl.kicker': '下载',
-      'dl.title': '把它装进<em>客户的内网</em>。',
-      'dl.lede': '客户端是一个自包含的 Node.js bundle（需要 Node 22+）。安装时输入控制面地址，以及管理员签发的一次性接入令牌。',
+      'dl.kicker': '下载与版本',
+      'dl.title': '免费装进<em>客户的内网</em>。',
+      'dl.lede': 'User 版免费下载；Developer 与 Enterprise 版按项目咨询付费。客户端是一个自包含的 Node.js bundle（需要 Node 22+）。安装时输入控制面地址，以及管理员签发的一次性接入令牌。',
+      'price.user.badge': '免费',
+      'price.consult': '咨询报价',
+      'price.user.price': '¥0',
+      'price.user.unit': '永久免费',
+      'price.user.desc': '终端用户客户端：本机会话、内核切换、技能、记忆与备份。下载即用，不需要联系我们。',
+      'price.user.li1': 'macOS / Windows / Linux 客户端',
+      'price.user.li2': '会话、工作区与账本留在本机，无遥测',
+      'price.user.li3': '接入客户自建的 HarnessBuilder 控制面',
+      'price.user.cta': '免费下载',
+      'price.dev.price': '按项目',
+      'price.dev.unit': '付费',
+      'price.dev.desc': '给平台团队用：编写 Harness 版本、分配技能、编排工作流，并把发行产物交给 User 客户端。',
+      'price.dev.li1': 'Harness 版本与开发者控制台',
+      'price.dev.li2': '工作流 v1 与 WYSIWYG 工作室',
+      'price.dev.li3': '技能包、记忆策略与审批配置',
+      'price.ent.price': '按部署',
+      'price.ent.unit': '付费',
+      'price.ent.desc': '整栈私有化：把身份、策略、密钥、路由与审计放进客户自己的机房，按客户环境交付。',
+      'price.ent.li1': '控制面、网关与管理员控制台',
+      'price.ent.li2': 'Ed25519 策略签名与密钥托管',
+      'price.ent.li3': '部署、升级与运行支持',
+      'price.contact': '联系我们',
       'dl.osUnix': 'Node 22+', 'dl.osWin': 'Node 22+ · PowerShell',
       'dl.macDesc': '安装到 ~/.local/bin，接入设备并启动本机 runtime。',
       'dl.winDesc': '安装到 %LOCALAPPDATA%\\harnessbuilder，写入用户 PATH 并创建命令入口。',
@@ -133,14 +157,16 @@
       'a11y.skip': 'Skip to content',
       'a11y.lang': 'Interface language',
       'a11y.copy': 'Copy command',
+      'a11y.themeToLight': 'Switch to light theme',
+      'a11y.themeToDark': 'Switch to dark theme',
       'brand.ver': 'v0.3.1',
       'nav.why': 'Why', 'nav.arch': 'Architecture', 'nav.ui': 'Interface', 'nav.security': 'Security', 'nav.download': 'Download',
-      'nav.cta': 'Download client', 'nav.github': 'BuildHarness on GitHub',
+      'nav.cta': 'Download free', 'nav.github': 'BuildHarness on GitHub',
       'hero.kicker': 'Private-deployment agent harness', 'hero.kickerMeta': 'Protocol 1.2.0',
       'hero.title': 'The agent runs on their machines.<br>The <em>control plane</em> stays on yours.',
       'hero.lede': 'Identity, policy, keys and model routing stay on the customer’s own server. opencode, codex, gemini, goose and Claude Code sit behind one replaceable interface; sessions, workspaces and ledgers stay on the machine.',
-      'hero.ctaDownload': 'Download client', 'hero.ctaSecurity': 'See where the boundary sits',
-      'hero.stat1': 'interchangeable kernels', 'hero.stat2': 'device token lifetime', 'hero.stat3': 'provider keys on the client', 'hero.stat4': 'control-plane key encryption',
+      'hero.ctaDownload': 'Download User — free', 'hero.ctaSecurity': 'See where the boundary sits',
+      'hero.stat1': 'interchangeable kernels', 'hero.stat2': 'device token lifetime', 'hero.stat3': 'provider keys on the client', 'hero.stat4': 'trust boundary: server ⇄ machine',
       'hero.term.status': 'ledger verified',
       'hero.term.l1': 'harnessbuilder-client init --server 10.0.0.10',
       'hero.term.l2': 'Device enrolled · scoped token 15 min',
@@ -224,9 +250,31 @@
       'sec.4.title': 'Encrypted backups', 'sec.4.body': 'The client encrypts chunks before upload; the control plane stores only ciphertext, its hash, size and time, and cannot decrypt by default.',
       'sec.5.title': 'Hash-chained ledger', 'sec.5.body': 'Session and workflow events are appended to a hash chain; approval requests and decisions are recorded, and history cannot be edited or deleted.',
       'sec.6.title': 'Signed policy', 'sec.6.body': 'Ed25519 signatures, append-only revisions. Devices pin the public key and reject older revisions with policy_rollback.',
-      'dl.kicker': 'Download',
+      'dl.kicker': 'Download & editions',
       'dl.title': 'Ship it <em>into the customer’s network</em>.',
-      'dl.lede': 'The client is a self-contained Node.js bundle (Node 22+). At install time you enter the control-plane address and a one-time enrollment token issued by the administrator.',
+      'dl.lede': 'The User edition is free to download; Developer and Enterprise are paid, scoped per engagement. The client is a self-contained Node.js bundle (Node 22+). At install time you enter the control-plane address and a one-time enrollment token issued by the administrator.',
+      'price.user.badge': 'Free',
+      'price.consult': 'Talk to us',
+      'price.user.price': '¥0',
+      'price.user.unit': 'free forever',
+      'price.user.desc': 'The end-user client: local sessions, kernel switching, skills, memory and backup. Download it and go — no need to contact us.',
+      'price.user.li1': 'macOS / Windows / Linux client',
+      'price.user.li2': 'Sessions, workspaces and ledger stay local; no telemetry',
+      'price.user.li3': 'Connects to any HarnessBuilder control plane the customer runs',
+      'price.user.cta': 'Download free',
+      'price.dev.price': 'Per project',
+      'price.dev.unit': 'paid',
+      'price.dev.desc': 'For platform teams: author Harness versions, assign skills, orchestrate workflows and hand release artifacts to User clients.',
+      'price.dev.li1': 'Harness versions and the developer console',
+      'price.dev.li2': 'Workflow v1 and the WYSIWYG studio',
+      'price.dev.li3': 'Skill packs, memory policy and approval config',
+      'price.ent.price': 'Per deployment',
+      'price.ent.unit': 'paid',
+      'price.ent.desc': 'The full private stack: identity, policy, keys, routing and audit inside the customer’s own data centre, delivered against their environment.',
+      'price.ent.li1': 'Control plane, gateway and admin console',
+      'price.ent.li2': 'Ed25519 policy signing and key custody',
+      'price.ent.li3': 'Deployment, upgrades and operational support',
+      'price.contact': 'Contact us',
       'dl.osUnix': 'Node 22+', 'dl.osWin': 'Node 22+ · PowerShell',
       'dl.macDesc': 'Installs to ~/.local/bin, enrolls the device and starts the local runtime.',
       'dl.winDesc': 'Installs to %LOCALAPPDATA%\\harnessbuilder, writes the user PATH and creates the command shim.',
@@ -254,12 +302,17 @@
   };
 
   var SHOTS = [
-    { src: 'assets/shots/local-chat.png', url: 'http://127.0.0.1:8788' },
-    { src: 'assets/shots/local-skills.png', url: 'http://127.0.0.1:8788' },
-    { src: 'assets/shots/console-overview.png', url: 'https://console.internal/overview' },
-    { src: 'assets/shots/console-harness.png', url: 'https://console.internal/harness' },
-    { src: 'assets/shots/console-marketplace.png', url: 'https://console.internal/marketplace' }
+    { file: 'local-chat.png', url: 'http://127.0.0.1:8788' },
+    { file: 'local-skills.png', url: 'http://127.0.0.1:8788' },
+    { file: 'console-overview.png', url: 'https://console.internal/overview' },
+    { file: 'console-harness.png', url: 'https://console.internal/harness' },
+    { file: 'console-marketplace.png', url: 'https://console.internal/marketplace' }
   ];
+
+  // Screenshots exist in both UI languages; the site swaps them with the copy.
+  function shotSrc(meta) {
+    return 'assets/shots/' + lang + '/' + meta.file;
+  }
 
   var lang = 'zh';
   var shotIndex = 0;
@@ -276,6 +329,33 @@
 
   function readStored() {
     try { return localStorage.getItem('hb-site-lang'); } catch (e) { return null; }
+  }
+
+  var theme = docEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+
+  function syncUrl() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      params.set('lang', lang);
+      params.set('theme', theme);
+      window.history.replaceState(null, '', window.location.pathname + '?' + params.toString() + window.location.hash);
+    } catch (e) { /* history may be unavailable */ }
+  }
+
+  function applyTheme(next, persist) {
+    theme = next === 'light' ? 'light' : 'dark';
+    docEl.setAttribute('data-theme', theme);
+    var btn = document.getElementById('themeToggle');
+    if (btn) {
+      btn.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+      btn.setAttribute('aria-label', t(theme === 'light' ? 'a11y.themeToDark' : 'a11y.themeToLight'));
+    }
+    var meta = document.getElementById('themeColor');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#f3f5ef' : '#070a09');
+    if (persist) {
+      try { localStorage.setItem('hb-site-theme', theme); } catch (e) { /* storage may be unavailable */ }
+      syncUrl();
+    }
   }
 
   function applyText() {
@@ -301,6 +381,7 @@
   function renderShot(index, swap) {
     shotIndex = index;
     var meta = SHOTS[index];
+    var src = shotSrc(meta);
     var img = document.getElementById('shotImg');
     var url = document.getElementById('shotUrl');
     var capTitle = document.getElementById('shotCapTitle');
@@ -319,10 +400,10 @@
     if (img) {
       img.alt = t('ui.alt' + (index + 1));
       if (!swap) {
-        if (img.getAttribute('src') === meta.src) img.classList.add('on');
-        else preload(meta.src, img);
+        if (img.getAttribute('src') === src) img.classList.add('on');
+        else preload(src, img);
       } else {
-        preload(meta.src, img);
+        preload(src, img);
       }
     }
   }
@@ -354,12 +435,10 @@
       buttons[i].setAttribute('aria-pressed', on ? 'true' : 'false');
     }
     applyText();
+    applyTheme(theme, false);
     if (persist) {
       store(lang);
-      try {
-        var nextUrl = window.location.pathname + '?lang=' + lang + window.location.hash;
-        window.history.replaceState(null, '', nextUrl);
-      } catch (e) { /* history may be unavailable */ }
+      syncUrl();
     }
   }
 
@@ -452,6 +531,14 @@
     });
   }
 
+  var themeButton = document.getElementById('themeToggle');
+  if (themeButton) {
+    themeButton.addEventListener('click', function () {
+      applyTheme(theme === 'light' ? 'dark' : 'light', true);
+    });
+  }
+
+  applyTheme(theme, false);
   setLang(initial, false);
   initReveal();
   initCopy();
