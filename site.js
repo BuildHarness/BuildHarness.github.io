@@ -306,10 +306,13 @@
     var capTitle = document.getElementById('shotCapTitle');
     var capBody = document.getElementById('shotCapBody');
     var tabs = document.querySelectorAll('.shot-tabs button');
+    var stage = document.getElementById('shotStage');
 
     for (var i = 0; i < tabs.length; i += 1) {
       tabs[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
+      if (stage) tabs[i].setAttribute('aria-controls', 'shotStage');
     }
+    if (stage && tabs[index]) stage.setAttribute('aria-labelledby', tabs[index].id);
     if (url) url.textContent = meta.url;
     if (capTitle) capTitle.textContent = t('ui.cap' + (index + 1) + '.title');
     if (capBody) capBody.textContent = t('ui.cap' + (index + 1) + '.body');
@@ -409,6 +412,7 @@
   function initTabs() {
     var tabs = document.querySelectorAll('.shot-tabs button');
     for (var i = 0; i < tabs.length; i += 1) {
+      tabs[i].id = 'shotTab' + i;
       tabs[i].addEventListener('click', function () {
         renderShot(Number(this.getAttribute('data-shot')), true);
       });
